@@ -1,20 +1,17 @@
 def read_file_to_dict(filename):
     """Lee un archivo de ventas y agrupa los montos por producto."""
     ventas = {}
-    try:
-        with open(filename, "r") as file:
-            linea = file.readline().strip()
-            partes = linea.split(";")
-            for venta in partes:
-                if venta:  # evita strings vacíos
-                    nombre, monto = venta.split(":")
-                    monto = float(monto)
-                    if nombre in ventas:
-                        ventas[nombre].append(monto)
-                    else:
-                        ventas[nombre] = [monto]
-    except FileNotFoundError:
-        print(f"Error: el archivo '{filename}' no fue encontrado.")
+    with open(filename, "r") as file:
+        linea = file.readline().strip()
+        partes = linea.split(";")
+        for venta in partes:
+            if venta:  # evita strings vacíos
+                nombre, monto = venta.split(":")
+                monto = float(monto)
+                if nombre in ventas:
+                    ventas[nombre].append(monto)
+                else:
+                    ventas[nombre] = [monto]
     return ventas
 
 
